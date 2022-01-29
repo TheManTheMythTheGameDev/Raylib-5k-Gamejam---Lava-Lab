@@ -141,11 +141,13 @@
       <UndefinePreprocessorDefinitions>_DEBUG;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>raylib\raylib.lib;px\PhysX_64.lib;px\PhysXCharacterKinematic_static_64.lib;px\PhysXCommon_64.lib;px\PhysXCooking_64.lib;px\PhysXExtensions_static_64.lib;px\PhysXFoundation_64.lib;px\PhysXTask_static_64.lib;px\PhysXVehicle_static_64.lib;px\PhysXPvdSDK_static_64.lib</AdditionalDependencies>
+      <NoEntryPoint>false</NoEntryPoint>
+      <AdditionalOptions>/ENTRY:mainCRTStartup %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
