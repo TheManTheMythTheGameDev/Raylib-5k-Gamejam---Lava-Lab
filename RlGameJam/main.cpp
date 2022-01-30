@@ -58,7 +58,7 @@ int main(void)
 	AddLight(Light{ Vector3{ 0, 5, 0 }, Vector3{ 0, 0, 0 }, RED, 30.0f, POINT, true });
 	void* end = AddLight(Light{ Vector3{ 0, 5, 12.0f }, Vector3{ 0, 0, 12.0f }, BLUE, 30.0f, POINT, true });
 
-	Texture2D texture = LoadTexture("introgif.png");        // Texture loading
+	Texture2D texture = LoadTexture("res/introgif.png");        // Texture loading
 
 	Vector2 position = { 0.0f, 0.0f };
 	Rectangle frameRec = { 0.0f, 0.0f, (float)texture.width / 34, (float)texture.height };
@@ -75,12 +75,12 @@ int main(void)
 	float finalScale = 50.0f;
 	float currentScale = startScale;
 
-	GameObject2D nameTexture = GameObject2D("LavaLab.png");
+	GameObject2D nameTexture = GameObject2D("res/LavaLab.png");
 	nameTexture.origin = Vector2{ (float)nameTexture.tex.width / 2, (float)nameTexture.tex.height/2 };
 	nameTexture.position = Vector2{ (float)(GetScreenWidth()/2) - (nameTexture.tex.width / 2), 100 };
 	nameTexture.scale = 10.0f;
 
-	GameObject2D playButton = GameObject2D("LLPlay.png");
+	GameObject2D playButton = GameObject2D("res/LLPlay.png");
 	playButton.origin = Vector2{ (float)playButton.tex.width / 2, (float)playButton.tex.height / 2 };
 	playButton.position = Vector2{ (float)(GetScreenWidth() / 2) - (nameTexture.tex.width / 2), 350 };
 	playButton.scale = 0.3f;
@@ -92,32 +92,32 @@ int main(void)
 	player.dyn->release();
 	player.dyn = CreateCapsule(Vector3{ 0.0f, 8.0f, 0.0f }, 2.0f, 1.0f, Vector3Zero(), 10.0f);
 
-	GameObject level1 = GameObject("lvl1.obj");
+	GameObject level1 = GameObject("res/lvl1.obj");
 	level1.dyn->release();
 	level1.dyn = CreateMesh(Vector3Zero(), level1.model, 0, 1.0f, 10.0f);
 	level1.BindToPxBody = true;
 
-	GameObject level2 = GameObject("lvl2.obj");
+	GameObject level2 = GameObject("res/lvl2.obj");
 	level2.dyn->release();
 	level2.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level2.model, 0, 1.0f, 10.0f);
 	level2.BindToPxBody = true;
 
-	GameObject level3 = GameObject("lvl3.obj");
+	GameObject level3 = GameObject("res/lvl3.obj");
 	level3.dyn->release();
 	level3.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level3.model, 0, 1.0f, 10.0f);
 	level3.BindToPxBody = true;
 
-	GameObject level4 = GameObject("lvl4.obj");
+	GameObject level4 = GameObject("res/lvl4.obj");
 	level4.dyn->release();
 	level4.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level4.model, 0, 1.0f, 10.0f);
 	level4.BindToPxBody = true;
 
-	GameObject level5 = GameObject("lvl5.obj");
+	GameObject level5 = GameObject("res/lvl5.obj");
 	level5.dyn->release();
 	level5.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level5.model, 0, 1.0f, 10.0f);
 	level5.BindToPxBody = true;
 
-	GameObject level6 = GameObject("lvl6.obj");
+	GameObject level6 = GameObject("res/lvl6.obj");
 	level6.dyn->release();
 	level6.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level6.model, 0, 1.0f, 10.0f);
 	level6.BindToPxBody = true;
@@ -138,19 +138,19 @@ int main(void)
 	allLevels->next = lvl2;
 
 	Vector3 lavaPosition = { 0.0f, 0.0f, -5.0f };
-	Model lava = LoadModel("lava.obj");
-	lava.materials[0] = LoadPBRMaterial("LavaAlbedo.png", 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	Model lava = LoadModel("res/lava.obj");
+	lava.materials[0] = LoadPBRMaterial("res/LavaAlbedo.png", 0, 0, 0, 0, TEXTURE_FILTER_POINT);
 
 	Tools currentTool = NONE;
 
-	Model grapplinggun = LoadModel("grapplinggun.obj");
+	Model grapplinggun = LoadModel("res/grapplinggun.obj");
 	grapplinggun.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
 
 	Vector3 grapplePoint = Vector3{ 0.0f, 0.0f, 0.0f };
 	float maxGrappleDistance = 100.0f;
 	bool isGrappling = false;
 
-	Texture2D grtex = LoadTexture("1ToUse.png");
+	Texture2D grtex = LoadTexture("res/1ToUse.png");
 
 	int levnb = 1;
 
@@ -158,9 +158,9 @@ int main(void)
 
 	const char* text = TextFormat("YOUR TIME: %i SECONDS", timeTaken);
 
-	Sound whoosh = LoadSound("wind_trim.mp3");
+	Sound whoosh = LoadSound("res/wind_trim.mp3");
 	SetSoundVolume(whoosh, 20.0f);
-	Sound jump = LoadSound("Jump.mp3");
+	Sound jump = LoadSound("res/Jump.mp3");
 	SetSoundVolume(jump, 20.0f);
 
 	lava.transform = MatrixMultiply(lava.transform, MatrixScale(10.0f, 10.0f, 1.0f));
