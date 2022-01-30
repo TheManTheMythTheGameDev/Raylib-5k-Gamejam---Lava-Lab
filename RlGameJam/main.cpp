@@ -43,7 +43,7 @@ int main(void)
 
 	SetTargetFPS(60);
 
-	// ChangeDirectory(GetApplicationDirectory());
+	ChangeDirectory(GetApplicationDirectory());
 
 	rlFPCamera cam;
 

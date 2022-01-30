@@ -164,6 +164,7 @@
     <ClInclude Include="GameObject2D.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Physics.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="rlFPCamera.h" />
     <ClInclude Include="rlpbr.h" />
     <ClInclude Include="shaders.h" />
@@ -171,6 +172,12 @@
   <ItemGroup>
     <None Include="base_lighting.vert" />
     <None Include="lighting.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RlGameJam.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\x64\Logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
