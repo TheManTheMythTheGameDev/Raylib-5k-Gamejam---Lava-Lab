@@ -1,5 +1,7 @@
 #include <raylib/raylib.h>
 #include <raylib/rlgl.h>
+#define RAYGUI_IMPLEMENTATION
+#include <raylib/extras/raygui.h>
 #include "GameObject.h"
 #include "GameObject2D.h"
 #include "rlFPCamera.h"
@@ -15,6 +17,7 @@ enum GameState
 {
 	INTRO,
 	TITLE,
+	SETTINGS,
 	GAMEPLAY,
 	END
 };
@@ -82,8 +85,13 @@ int main(void)
 
 	GameObject2D playButton = GameObject2D("res/LLPlay.png");
 	playButton.origin = Vector2{ (float)playButton.tex.width / 2, (float)playButton.tex.height / 2 };
-	playButton.position = Vector2{ (float)(GetScreenWidth() / 2) - (nameTexture.tex.width / 2), 350 };
+	playButton.position = Vector2{ (float)(GetScreenWidth() / 2) - (playButton.tex.width / 2), 350 };
 	playButton.scale = 0.3f;
+
+	GameObject2D settingsButton = GameObject2D("res/LLSettings.png");
+	settingsButton.origin = Vector2{ (float)settingsButton.tex.width / 2, (float)settingsButton.tex.height / 2 };
+	settingsButton.position = Vector2{ (float)(GetScreenWidth() / 2) - (settingsButton.tex.width / 2) + (playButton.tex.width)+ 50, 350 };
+	settingsButton.scale = 0.3f;
 
 	int nameFrames = 0;
 	int playFrames = 0;
@@ -167,10 +175,16 @@ int main(void)
 
 	SetExitKey(KEY_NULL);
 
+	float SFXVolume = 20.0f;
+	float masterVolume = 1.0f;
+	float masterVolumeDisplay = 100.0f;
+	float mouseSens = 600.0f;
+
+	GameState settingsReturnTo = TITLE;
+
 	while (!WindowShouldClose())
 	{
 		float dt = GetFrameTime();
-
 
 		if (currentState == INTRO)
 		{
@@ -227,11 +241,49 @@ int main(void)
 					currentState = GAMEPLAY;
 					cam.Setup(45.0f, Vector3{ 0.0f, 0.0f, 0.0f });
 				}
+				if (settingsButton.DetectHover() && settingsButton.scale < 0.5f)
+				{
+					settingsButton.scale += 0.01f;
+				}
+				else if (!settingsButton.DetectHover() && settingsButton.scale > 0.3f)
+				{
+					settingsButton.scale -= 0.01f;
+				}
+				if (settingsButton.DetectHover() && IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+				{
+					currentState = SETTINGS;
+					settingsReturnTo = TITLE;
+				}
 
 				nameTexture.Render();
 				playButton.Render();
+				settingsButton.Render();
 			}
 
+			else if (currentState == SETTINGS)
+			{
+				DrawTexturePro(texture, frameRec, Rectangle{ currentScale, currentScale, GetScreenWidth() - (currentScale * 2), GetScreenHeight() - (currentScale * 2) }, Vector2{ 0.0f, 0.0f }, 0.0f, WHITE);
+				masterVolumeDisplay = GuiSliderBar(Rectangle{ ((float)GetScreenWidth() / 2) - 150, 0, 300, 50 }, "Master Volume", TextFormat("%f", masterVolumeDisplay), masterVolumeDisplay, 0.0f, 100.0f);
+				masterVolume = masterVolumeDisplay / 100.0f;
+				SFXVolume = GuiSliderBar(Rectangle{ ((float)GetScreenWidth() / 2) - 150, 100, 300, 50 }, "SFX Volume", TextFormat("%f", SFXVolume), SFXVolume, 0.0f, 100.0f);
+				mouseSens = GuiSliderBar(Rectangle{ ((float)GetScreenWidth() / 2) - 150, 200, 300, 50 }, "Mouse Sensitivity", TextFormat("%f", mouseSens), mouseSens, 100.0f, 1000.0f);
+
+				float finSfxVol = SFXVolume * masterVolume;
+				SetSoundVolume(jump, finSfxVol);
+				SetSoundVolume(whoosh, finSfxVol);
+				cam.MouseSensitivity = mouseSens;
+
+				if (GuiButton(Rectangle{ ((float)GetScreenWidth() / 2) - 50, 300, 100, 100 }, "BACK"))
+				{
+					if (settingsReturnTo == GAMEPLAY)
+					{
+						cam.HideCursor = true;
+						cam.UseMouseX = true;
+						cam.UseMouseY = true;
+					}
+					currentState = settingsReturnTo;
+				}
+			}
 
 			else if (currentState == GAMEPLAY)
 			{
@@ -340,6 +392,9 @@ int main(void)
 						cam.HideCursor = false;
 						cam.UseMouseX = false;
 						cam.UseMouseY = false;
+						currentState = SETTINGS;
+						settingsReturnTo = GAMEPLAY;
+						cam.Update();
 					}
 					else
 					{
@@ -414,7 +469,7 @@ int main(void)
 				DrawLine((GetScreenWidth() / 2) - 20.0f, (GetScreenHeight() / 2), (GetScreenWidth() / 2) + 20.0f, (GetScreenHeight() / 2), BLACK);
 				DrawLine((GetScreenWidth() / 2), (GetScreenHeight() / 2) - 20.0f, (GetScreenWidth() / 2), (GetScreenHeight() / 2) + 20.0f, BLACK);
 			}
-			if (currentState == END)
+			else if (currentState == END)
 			{
 				int fontSize = 80;
 				DrawText("YOU WIN", (GetScreenWidth() / 2) - (MeasureText("YOU WIN", fontSize) / 2), (GetScreenHeight() / 2) - (fontSize/2), fontSize, WHITE);
