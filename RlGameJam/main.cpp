@@ -48,6 +48,10 @@ int main(void)
 
 	ChangeDirectory(GetApplicationDirectory());
 
+	Image logo = LoadImage("res/Logo.png");
+	SetWindowIcon(logo);
+	UnloadImage(logo);
+
 	rlFPCamera cam;
 
 	GameState currentState = INTRO;
