@@ -166,7 +166,7 @@ int main(void)
 
 	int levnb = 1;
 
-	int timeTaken = 0;
+	float timeTaken = 0.0f;
 
 	const char* text = TextFormat("YOUR TIME: %i SECONDS", timeTaken);
 
@@ -296,6 +296,7 @@ int main(void)
 
 				UpdatePBR(cam.GetCamera());
 
+				timeTaken += dt;
 
 				player.Update();
 
@@ -343,8 +344,7 @@ int main(void)
 						if (levnb > 6)
 						{
 							currentState = END;
-							timeTaken = (int)GetTime();
-							text = TextFormat("YOUR TIME: %i SECONDS", timeTaken);
+							text = TextFormat("YOUR TIME: %i SECONDS", (int)timeTaken);
 							cam.HideCursor = false;
 							cam.UseMouseX = false;
 							cam.UseMouseY = false;
