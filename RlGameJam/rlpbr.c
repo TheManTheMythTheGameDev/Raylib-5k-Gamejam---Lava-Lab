@@ -36,6 +36,7 @@ pbr_internal_light *lights = NULL;
 pbr_internal_light empty = {0};
 
 void InitPBR() {
+    ChangeDirectory(GetApplicationDirectory());
     #ifdef BUNDLE_SHADERS
     pbr_shader = LoadShaderFromMemory(pbr_vs, pbr_fs);
     #else
