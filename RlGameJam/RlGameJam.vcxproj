@@ -85,6 +85,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>include;$(IncludePath)</IncludePath>
     <LibraryPath>lib;lib\Release;$(LibraryPath)</LibraryPath>
+    <TargetName>Lava Lab</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

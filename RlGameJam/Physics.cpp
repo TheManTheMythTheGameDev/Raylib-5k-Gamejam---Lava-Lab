@@ -220,7 +220,7 @@ PxRigidStatic* CreatePlane(Vector3 position, PxQuat rotation)
 	return plane;
 }
 
-PxRigidDynamic* CreateMesh(Vector3 position, Model& model, unsigned int meshID, float scale, float density)
+PxRigidDynamic* CreateMesh(Vector3 position, Model& model, unsigned int meshID, float scale, float density, ActiveGroup filterGroup)
 {
 	PxReal pDensity = density;
 	PxTransform transform(PxVec3(position.x, position.y, position.z), PxQuat(gIdentity));
@@ -254,7 +254,7 @@ PxRigidDynamic* CreateMesh(Vector3 position, Model& model, unsigned int meshID, 
 	PxShape* shape = gPhysics->createShape(geom, *gMaterial, true, PxShapeFlag::eVISUALIZATION | PxShapeFlag::eSCENE_QUERY_SHAPE | PxShapeFlag::eSIMULATION_SHAPE);
 	shape->setName("shape");
 	PxFilterData filterData;
-	filterData.word0 = GROUND;
+	filterData.word0 = filterGroup;
 	shape->setQueryFilterData(filterData);
 	PxRigidDynamic* body = gPhysics->createRigidDynamic(PxTransform(PxVec3(position.x, position.y, position.z), PxQuat(gIdentity)));
 	body->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
@@ -275,12 +275,12 @@ void DrawBox(PxShape* pShape, PxRigidActor* actor, Model& cube, Vector3 scale)
 	DrawModel(cube, Vector3Zero(), 1.0f, WHITE);
 }
 
-PxRaycastBuffer PhysXRaycast(PxVec3 origin, PxVec3 unitDir, PxReal maxDistance)
+PxRaycastBuffer PhysXRaycast(PxVec3 origin, PxVec3 unitDir, PxReal maxDistance, ActiveGroup filter)
 {
 	PxRaycastBuffer hit;
 
 	PxQueryFilterData filterData = PxQueryFilterData();
-	filterData.data.word0 = GROUND;
+	filterData.data.word0 = filter;
 	gScene->raycast(origin, unitDir, maxDistance, hit, PxHitFlag::eDEFAULT | PxHitFlag::ePOSITION, filterData);
 	return hit;
 }

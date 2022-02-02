@@ -104,49 +104,49 @@ int main(void)
 	player.dyn->release();
 	player.dyn = CreateCapsule(Vector3{ 0.0f, 8.0f, 0.0f }, 2.0f, 1.0f, Vector3Zero(), 10.0f);
 
-	GameObject level1 = GameObject("res/lvl1.obj");
-	level1.dyn->release();
-	level1.dyn = CreateMesh(Vector3Zero(), level1.model, 0, 1.0f, 10.0f);
-	level1.BindToPxBody = true;
+	GameObject* level1 = new GameObject("res/lvl1.obj");
+	level1->dyn->release();
+	level1->dyn = CreateMesh(Vector3Zero(), level1->model, 0, 1.0f, 10.0f);
+	level1->BindToPxBody = true;
 
-	GameObject level2 = GameObject("res/lvl2.obj");
-	level2.dyn->release();
-	level2.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level2.model, 0, 1.0f, 10.0f);
-	level2.BindToPxBody = true;
+	GameObject* level2 = new GameObject("res/lvl2.obj");
+	level2->dyn->release();
+	level2->dyn = CreateMesh(Vector3{ -100, 0, 0 }, level2->model, 0, 1.0f, 10.0f);
+	level2->BindToPxBody = true;
 
-	GameObject level3 = GameObject("res/lvl3.obj");
-	level3.dyn->release();
-	level3.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level3.model, 0, 1.0f, 10.0f);
-	level3.BindToPxBody = true;
+	GameObject* level3 = new GameObject("res/lvl3.obj");
+	level3->dyn->release();
+	level3->dyn = CreateMesh(Vector3{ -100, 0, 0 }, level3->model, 0, 1.0f, 10.0f);
+	level3->BindToPxBody = true;
 
-	GameObject level4 = GameObject("res/lvl4.obj");
-	level4.dyn->release();
-	level4.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level4.model, 0, 1.0f, 10.0f);
-	level4.BindToPxBody = true;
+	GameObject* level4 = new GameObject("res/lvl4.obj");
+	level4->dyn->release();
+	level4->dyn = CreateMesh(Vector3{ -100, 0, 0 }, level4->model, 0, 1.0f, 10.0f);
+	level4->BindToPxBody = true;
 
-	GameObject level5 = GameObject("res/lvl5.obj");
-	level5.dyn->release();
-	level5.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level5.model, 0, 1.0f, 10.0f);
-	level5.BindToPxBody = true;
+	GameObject* level5 = new GameObject("res/lvl5.obj");
+	level5->dyn->release();
+	level5->dyn = CreateMesh(Vector3{ -100, 0, 0 }, level5->model, 0, 1.0f, 10.0f);
+	level5->BindToPxBody = true;
 
-	GameObject level6 = GameObject("res/lvl6.obj");
-	level6.dyn->release();
-	level6.dyn = CreateMesh(Vector3{ -100, 0, 0 }, level6.model, 0, 1.0f, 10.0f);
-	level6.BindToPxBody = true;
+	GameObject* level6 = new GameObject("res/lvl6.obj");
+	level6->dyn->release();
+	level6->dyn = CreateMesh(Vector3{ -100, 0, 0 }, level6->model, 0, 1.0f, 10.0f);
+	level6->BindToPxBody = true;
 
-	level1.model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
-	level2.model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
-	level3.model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
-	level4.model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
-	level5.model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
-	level6.model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	level1->model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	level2->model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	level3->model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	level4->model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	level5->model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	level6->model.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
 
-	Level* lvl6 = new Level{ level6, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, NULL };
-	Level* lvl5 = new Level{ level5, BoundingBox{ Vector3{ 0, 0, 30.602f }, Vector3{ 5, 20, 38.602f } }, lvl6 };
-	Level* lvl4 = new Level{ level4, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, lvl5 };
-	Level* lvl3 = new Level{ level3, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, lvl4 };
-	Level* lvl2 = new Level{ level2, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, lvl3 };
-	Level* allLevels = new Level{ level1, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, lvl2 };
+	Level* lvl6 = new Level{ { level6 }, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, false, { NONE, GRAPPLING_GUN }, false, NULL };
+	Level* lvl5 = new Level{ {level5}, BoundingBox{ Vector3{ 0, 0, 30.602f }, Vector3{ 5, 20, 38.602f } }, false, { NONE, GRAPPLING_GUN }, false, lvl6 };
+	Level* lvl4 = new Level{ {level4}, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, false, { NONE, GRAPPLING_GUN }, false, lvl5 };
+	Level* lvl3 = new Level{ {level3}, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, false, { NONE, GRAPPLING_GUN }, false, lvl4 };
+	Level* lvl2 = new Level{ {level2}, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, false, { NONE }, false, lvl3 };
+	Level* allLevels = new Level{ vector<GameObject*> {level1}, BoundingBox{ Vector3{ 0, 0, 8.0f }, Vector3{ 5, 20, 16.0f } }, true, { NONE }, false, lvl2 };
 	allLevels->next = lvl2;
 
 	Vector3 lavaPosition = { 0.0f, 0.0f, -5.0f };
@@ -157,6 +157,8 @@ int main(void)
 
 	Model grapplinggun = LoadModel("res/grapplinggun.obj");
 	grapplinggun.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
+	Model knockbackgun = LoadModel("res/knockbackgun.obj");
+	knockbackgun.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
 
 	Vector3 grapplePoint = Vector3{ 0.0f, 0.0f, 0.0f };
 	float maxGrappleDistance = 100.0f;
@@ -329,8 +331,8 @@ int main(void)
 				Level* current = allLevels;
 				while (current)
 				{
-					current->obj.Update();
-					if (current->CheckDone(cam.GetCameraPosition()) && current->obj.dyn->getGlobalPose().p.x > -100)
+					current->Update();
+					if (current->CheckDone(cam.GetCameraPosition()) && current->isActive)
 					{
 						Restart(lavaPosition, player);
 						current->SwitchOut();
@@ -410,20 +412,33 @@ int main(void)
 
 				PxTransform plT = player.dyn->getGlobalPose();
 				cam.SetCameraPosition(Vector3{ plT.p.x, plT.p.y, plT.p.z });
-
+				
 				Vector3 camPos = Vector3Add(cam.GetCameraPosition(), Vector3Add(Vector3Scale(cam.GetForwardVector(), 2.0f), Vector3Scale(camRight, -1.0f)));
+
+				vector<int> available;
+				bool limitedGrapple = false;
 
 				cam.BeginMode3D();
 				{
 					Level* cld = allLevels;
+					int i = 1;
 					while (cld)
 					{
-						cld->obj.Draw();
+						cld->Draw();
+						if (i == levnb)
+						{
+							available = cld->availableTools;
+							limitedGrapple = cld->isGrapplingGunLimited;
+						}
 						cld = cld->next;
+						i++;
 					}
 					DrawModel(lava, lavaPosition, 1.0f, WHITE);
-					if (currentTool == GRAPPLING_GUN)
+					switch (currentTool)
 					{
+					case (GRAPPLING_GUN):
+					{
+						if (find(available.begin(), available.end(), 1) == available.end()) break;
 						Vector3 D = Vector3Normalize(cam.GetForwardVector());
 						if (isGrappling) D = Vector3Normalize(Vector3Subtract(grapplePoint, camPos));
 						Vector3 U = { 0.0f, 1.0f, 0.0f };
@@ -434,12 +449,12 @@ int main(void)
 						Vector3 U0 = Vector3CrossProduct(W0, D);
 						float angle_B = atan2(Vector3DotProduct(W0, U), Vector3DotProduct(U0, U) / Vector3Length(W0) * Vector3Length(U0));
 						Vector3 grappleAngle = Vector3{ angle_B, angle_P, -angle_H };
-						grapplinggun.transform = MatrixMultiply(MatrixIdentity(), MatrixMultiply(MatrixRotateXYZ(grappleAngle), MatrixTranslate(camPos.x, camPos.y, camPos.z)));
+						grapplinggun.transform = MatrixMultiply(MatrixIdentity(), MatrixMultiply(MatrixRotateXYZ(grappleAngle), MatrixTranslate(camPos.x, camPos.y - 0.2f, camPos.z)));
 						DrawModel(grapplinggun, Vector3Zero(), 1.0f, WHITE);
 
 						if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 						{
-							PxRaycastBuffer grappleRay = PhysXRaycast(PxVec3(camPos.x, camPos.y, camPos.z), PxVec3(D.x, D.y, D.z), maxGrappleDistance);
+							PxRaycastBuffer grappleRay = PhysXRaycast(PxVec3(camPos.x, camPos.y, camPos.z), PxVec3(D.x, D.y, D.z), maxGrappleDistance, limitedGrapple ? GRAPPLE_PAD : GROUND);
 							float grapCeil = 10.0f;
 							if (levnb == 4 || levnb == 5 || levnb == 6) grapCeil = 44.0f;
 							if (!isGrappling && grappleRay.hasAnyHits() && grappleRay.getAnyHit(0).position.y < grapCeil)
@@ -462,6 +477,45 @@ int main(void)
 						{
 							isGrappling = false;
 						}
+						break;
+					}
+					case (KNOCKBACK_GUN):
+					{
+						if (find(available.begin(), available.end(), 2) == available.end()) break;
+						Vector3 D = Vector3Normalize(cam.GetForwardVector());
+						Vector3 U = { 0.0f, 1.0f, 0.0f };
+						Vector3 R = Vector3CrossProduct(U, D);
+						float angle_H = atan2(D.y, D.x);
+						float angle_P = asin(D.z);
+						Vector3 W0 = Vector3{ -D.y, D.x, 0 };
+						Vector3 U0 = Vector3CrossProduct(W0, D);
+						float angle_B = atan2(Vector3DotProduct(W0, U), Vector3DotProduct(U0, U) / Vector3Length(W0) * Vector3Length(U0));
+						Vector3 knockbackAngle = Vector3{ angle_B, angle_P, -angle_H };
+						knockbackgun.transform = MatrixMultiply(MatrixIdentity(), MatrixMultiply(MatrixRotateXYZ(knockbackAngle), MatrixTranslate(camPos.x, camPos.y - 0.2f, camPos.z)));
+						DrawModel(knockbackgun, Vector3Zero(), 1.0f, WHITE);
+						if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+						{
+							PxVec3 knockbackDir = PxVec3(D.x, D.y, D.z);
+							float force = 40000;
+							Vector3 cp = cam.GetCameraPosition();
+							if (PhysXRaycast(PxVec3(cp.x, cp.y, cp.z), PxVec3(D.x, D.y, D.z), 10.0f, BOUNCE_PAD).hasAnyHits())
+							{
+								force *= 3;
+							}
+							knockbackDir *= (-1) * force;
+							player.dyn->addForce(knockbackDir);
+						}
+						break;
+					}
+					case (EXPLOSION_GUN):
+					{
+						if (find(available.begin(), available.end(), 3) == available.end()) break;
+						break;
+					}
+					default:
+					{
+						break;
+					}
 					}
 					if (levnb == 3)
 					{
@@ -490,17 +544,18 @@ int main(void)
 	UnloadTexture(grtex);
 
 	player.Unload();
-	level1.Unload();
-	level2.Unload();
-	level3.Unload();
-	level4.Unload();
-	level5.Unload();
-	level6.Unload();
+	Level* cur = allLevels;
+	while (cur)
+	{
+		cur->Unload();
+		cur = cur->next;
+	}
 
 	UnloadSound(whoosh);
 	UnloadSound(jump);
 
 	UnloadModel(grapplinggun);
+	UnloadModel(knockbackgun);
 
 	UnloadModel(lava);
 
