@@ -469,7 +469,8 @@ int main(void)
 							if (isGrappling)
 							{
 								rlDrawRenderBatchActive();
-								rlSetLineWidth(4000.0f);
+								Vector2 dpiScale = GetWindowScaleDPI();
+								rlSetLineWidth(5 * dpiScale.x * dpiScale.y);
 								DrawLine3D(camPos, grapplePoint, BLACK);
 								rlDrawRenderBatchActive();
 								rlSetLineWidth(1.0f);
