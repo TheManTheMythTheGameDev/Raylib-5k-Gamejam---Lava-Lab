@@ -34,7 +34,9 @@ int main(void)
 {
 	const int screenWidth = 800;
 	const int screenHeight = 450;
+#ifndef _DEBUG
 	SetTraceLogLevel(LOG_NONE);
+#endif // !_DEBUG
 	InitWindow(screenWidth, screenHeight, "Lava Lab");
 
 	InitPhysX();
@@ -449,7 +451,7 @@ int main(void)
 						Vector3 U0 = Vector3CrossProduct(W0, D);
 						float angle_B = atan2(Vector3DotProduct(W0, U), Vector3DotProduct(U0, U) / Vector3Length(W0) * Vector3Length(U0));
 						Vector3 grappleAngle = Vector3{ angle_B, angle_P, -angle_H };
-						grapplinggun.transform = MatrixMultiply(MatrixIdentity(), MatrixMultiply(MatrixRotateXYZ(grappleAngle), MatrixTranslate(camPos.x, camPos.y - 0.2f, camPos.z)));
+						grapplinggun.transform = MatrixMultiply(MatrixIdentity(), MatrixMultiply(MatrixRotateXYZ(grappleAngle), MatrixTranslate(camPos.x, camPos.y - 0.4f, camPos.z)));
 						DrawModel(grapplinggun, Vector3Zero(), 1.0f, WHITE);
 
 						if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
